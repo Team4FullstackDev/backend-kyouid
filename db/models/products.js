@@ -20,8 +20,12 @@ module.exports = (sequelize, DataTypes) => {
 				autoIncrement: true,
 				allowNull: false,
 			},
+			status: {
+				type: Sequelize.STRING,
+				allowNull: false,
+			},
 			title: {
-				type: DataTypes.STRING,
+				type: Sequelize.STRING,
 				allowNull: false,
 			},
 			price: {

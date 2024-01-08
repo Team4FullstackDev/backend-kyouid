@@ -9,6 +9,10 @@ module.exports = {
 				defaultValue: Sequelize.UUIDV4,
 				primaryKey: true,
 			},
+			avatar: {
+				type: Sequelize.STRING,
+				allowNull: true,
+			},
 			fullName: {
 				type: Sequelize.STRING,
 				allowNull: false,

@@ -9,6 +9,10 @@ module.exports = {
 				defaultValue: Sequelize.UUIDV4,
 				primaryKey: true,
 			},
+			status: {
+				type: Sequelize.STRING,
+				allowNull: false,
+			},
 			title: {
 				type: Sequelize.STRING,
 				allowNull: false,
