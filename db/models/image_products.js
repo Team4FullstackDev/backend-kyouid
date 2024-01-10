@@ -9,17 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // Image_Products belongs to Products
-      Image_Products.belongsTo(models.Products, { foreignKey: "productsId" });
-    }
-  }
-  class Products extends Model {
-    static associate(models) {
-      // Products has many Image_Products
-      Products.hasMany(models.Image_Products, {
-        foreignKey: "productsId",
+      Image_Products.belongsTo(models.Products, {
+        foreignKey: { name: "productsId", sourceKey: "id" },
       });
     }
   }
+
   Image_Products.init(
     {
       id: {
@@ -33,7 +28,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      images: {
+      image: {
         type: DataTypes.STRING,
         allowNull: false,
       },

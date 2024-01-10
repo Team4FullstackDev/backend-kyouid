@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const { upload } = require("../config/multer");
 
 const userModel = require("../controllers/users");
 const {
@@ -17,15 +18,13 @@ const {
   updateProduct,
   deleteProduct,
   getProductsByCategory,
+  handleUploadImages,
 } = require("../controllers/products");
-
-// const {
-//   getImages,
-//   getImagesById,
-//   createImage,
-//   updateImage,
-//   deleteImage,
-// } = require("../controllers/images");
+const {
+  saveImagesToDatabase,
+  getAllImages,
+  deleteImage,
+} = require("../controllers/images");
 
 router.get("/", userModel.home);
 router.get("/users", getUsers);
@@ -40,4 +39,16 @@ router.post("/products", createProduct);
 router.patch("/products/:id", updateProduct);
 router.delete("/products/:id", deleteProduct);
 
+router.get("/images", getAllImages);
+
+router.post("/upload/:id", upload.array("file", 5), async (req, res) => {
+  try {
+    await saveImagesToDatabase(req, res);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+router.delete("/images/:id", deleteImage);
 module.exports = router;

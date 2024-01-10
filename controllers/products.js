@@ -1,16 +1,4 @@
 const { Products, Image_Products } = require("../db/models");
-const multer = require("multer");
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "images/"); // Menentukan folder penyimpanan untuk file yang diunggah
-  },
-  filename: function (req, file, cb) {
-    // Menentukan nama file yang disimpan
-    cb(null, Date.now() + "-" + file.originalname);
-  },
-});
-const upload = multer({ storage: storage });
 
 module.exports.getProducts = async (req, res) => {
   try {
@@ -53,11 +41,10 @@ module.exports.getProductsById = async (req, res) => {
   }
 };
 
-module.exports.handleUploadImages = async (req, res) => {};
-
 module.exports.createProduct = async (req, res) => {
   try {
     const {
+      status,
       title,
       price,
       description,
@@ -67,9 +54,9 @@ module.exports.createProduct = async (req, res) => {
       series,
       character,
       manufacture,
-      status,
     } = req.body;
     const product = await Products.create({
+      status,
       title,
       price,
       description,
@@ -79,15 +66,13 @@ module.exports.createProduct = async (req, res) => {
       series,
       character,
       manufacture,
-      status,
     });
-    res
-      .status(201)
-      .json({ msg: "Product and images were created successfully" });
+    res.status(200).json({ msg: "Product was created successfully" });
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }
 };
+
 module.exports.updateProduct = async (req, res) => {
   try {
     const {

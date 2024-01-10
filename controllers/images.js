@@ -1,77 +1,56 @@
 const { Image_Products } = require("../db/models");
 
-module.exports.getImages = async (req, res) => {
+module.exports.saveImagesToDatabase = async (req, res) => {
   try {
-    const productId = req.params.productId;
-    const response = await Image_Products.findAll({
-      where: { productsId: productId },
-    });
-    res.status(200).json(response);
-  } catch (error) {
-    res.status(500).json({ msg: error.message });
-  }
-};
+    if (req.files && req.files.length > 0) {
+      const { id: productsId } = req.params;
 
-module.exports.getImagesById = async (req, res) => {
-  try {
-    const response = await Image_Products.findOne({
-      where: {
-        id: req.params.id,
-      },
-    });
-    res.status(200).json(response);
-  } catch (error) {
-    res.status(500).json({ msg: error.message });
-  }
-};
+      const savePromises = [];
 
-module.exports.createImage = async (req, res) => {
-  try {
-    const { thumbnail, images, productsId } = req.body;
-    const response = await Image_Products.create({
-      thumbnail,
-      images,
-      productsId,
-    });
-    res.status(201).json({ msg: "Image was created successfully", response });
-  } catch (error) {
-    res.status(500).json({ msg: error.message });
-  }
-};
+      for (const file of req.files) {
+        const { filename } = file;
 
-module.exports.updateImage = async (req, res) => {
-  try {
-    const image = await Image_Products.findByPk(req.params.id);
+        savePromises.push(
+          Image_Products.create({
+            thumbnail: req.body.thumbnail,
+            image: `images/${filename}`,
+            productsId,
+          })
+        );
+      }
 
-    if (!image) {
-      return res.status(404).json({ msg: "Image not found" });
+      await Promise.all(savePromises);
+
+      res.send("Images uploaded and saved to the database successfully!");
+    } else {
+      res.status(400).send("No files uploaded");
     }
-
-    const { thumbnail, images, productsId } = req.body;
-
-    await image.update({
-      thumbnail,
-      images,
-      productsId,
-    });
-
-    res.status(200).json({ msg: "Image was updated successfully" });
   } catch (error) {
-    res.status(500).json({ msg: error.message });
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+module.exports.getAllImages = async (req, res) => {
+  try {
+    const images = await Image_Products.findAll();
+    res.json(images);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
   }
 };
 
 module.exports.deleteImage = async (req, res) => {
   try {
-    const image = await Image_Products.findByPk(req.params.id);
+    const { id } = req.params;
+    const image = await Image_Products.findOne({ where: { id } });
+    if (!image) return res.status(404).send("Image not found");
 
-    if (!image) {
-      return res.status(404).json({ msg: "Image not found" });
-    }
-
-    await image.destroy();
-    res.status(200).json({ msg: "Image was deleted successfully" });
+    await Image_Products.destroy({ where: { id } });
+    res.send("Image deleted successfully!");
   } catch (error) {
-    res.status(500).json({ msg: error.message });
+    console.error(error);
+    res.status(500).send("Internal Server Error");
   }
 };
