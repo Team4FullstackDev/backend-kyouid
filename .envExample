@@ -1,0 +1,7 @@
+NODE_ENV=development
+PORT=9001
+DATABASE=kyouuid
+USER=root
+PASSWORD=
+HOST=localhost
+PORTDB=3306
