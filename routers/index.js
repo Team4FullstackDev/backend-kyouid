@@ -14,5 +14,3 @@ app.use('/wishlist', wishlist);
 app.use('/shipments', shipments);
 
 module.exports = app;
-
-module.exports = router;
