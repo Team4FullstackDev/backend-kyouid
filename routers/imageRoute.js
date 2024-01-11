@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { uploadProducts, uploadAvatar } = require('../middleware/multer');
+const { uploadProducts } = require('../middleware/multer');
 const { saveImagesToDatabase } = require('../controllers/images');
 
 // image Router
