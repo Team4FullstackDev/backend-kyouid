@@ -9,6 +9,8 @@ const database = require("./config/database");
 const app = express();
 const PORT = process.env.PORT || 9001;
 
+console.log(process.env.NODE_ENV)
+
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }

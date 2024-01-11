@@ -29,6 +29,8 @@ const {
 
 const shipmentController = require("../controllers/shipments");
 
+const wishlistController = require("../controllers/wishlist");
+
 router.get("/", userModel.home);
 router.get("/users", getUsers);
 router.get("/users/:id", getUsersById);
@@ -61,6 +63,15 @@ router.get("/shipments/:id", shipmentController.getShipmentsById);
 router.post("/shipments", shipmentController.createShipment);
 router.put("/shipments/:id", shipmentController.updateShipment);
 router.delete("/shipments/:id", shipmentController.deleteShipment);
+
+// Wishlist
+
+// TODO must add middleware for admin only
+router.get("/wishlist", wishlistController.getWishlish);
+// TODO must add middleware for logged in user only
+router.get("/wishlist/:userId", wishlistController.getWishlishByUserId);
+router.post("/wishlist", wishlistController.createWishlish);
+router.delete("/wishlist/:id", wishlistController.deleteWishlish);
 
 
 
