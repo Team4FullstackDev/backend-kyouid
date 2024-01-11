@@ -3,6 +3,7 @@ const router = express.Router();
 const { upload } = require("../config/multer");
 
 const userModel = require("../controllers/users");
+
 const {
   getUsers,
   getUsersById,
@@ -25,6 +26,8 @@ const {
   getAllImages,
   deleteImage,
 } = require("../controllers/images");
+
+const shipmentController = require("../controllers/shipments");
 
 router.get("/", userModel.home);
 router.get("/users", getUsers);
@@ -51,4 +54,14 @@ router.post("/upload/:id", upload.array("file", 5), async (req, res) => {
 });
 
 router.delete("/images/:id", deleteImage);
+
+// shipments
+router.get("/shipments", shipmentController.getShipments);
+router.get("/shipments/:id", shipmentController.getShipmentsById);
+router.post("/shipments", shipmentController.createShipment);
+router.put("/shipments/:id", shipmentController.updateShipment);
+router.delete("/shipments/:id", shipmentController.deleteShipment);
+
+
+
 module.exports = router;
