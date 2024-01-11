@@ -17,15 +17,15 @@ module.exports.cartsByUserId = async (req, res) => {
 }
 
 module.exports.addCart = async (req, res) => {
-    const { userId, productsId } = req.body
-    if(!userId || !productsId) {
+    const { userId, productId } = req.body
+    if(!userId || !productId) {
         return res.status(400).json({ msg: 'All fields are required' })
     }
     try {
         const response = await Carts.create({
             quantity: 1,
             userId: userId,
-            productsId: productsId
+            productId: productId
         })
         res.status(201).json({ msg: 'Cart was created successfully' })
     } catch (error) {
