@@ -1,6 +1,6 @@
 const { Whishlist } = require("../db/models");
 
-module.exports.getWishlish = async (req, res) => {
+module.exports.getWishlist = async (req, res) => {
   // Route for admin only
   try {
     const response = await Whishlist.findAll({

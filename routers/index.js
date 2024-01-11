@@ -31,6 +31,8 @@ const shipmentController = require("../controllers/shipments");
 
 const wishlistController = require("../controllers/wishlist");
 
+const cartController = require("../controllers/cart");
+
 router.get("/", userModel.home);
 router.get("/users", getUsers);
 router.get("/users/:id", getUsersById);
@@ -67,12 +69,17 @@ router.delete("/shipments/:id", shipmentController.deleteShipment);
 // Wishlist
 
 // TODO must add middleware for admin only
-router.get("/wishlist", wishlistController.getWishlish);
+router.get("/wishlists", wishlistController.getWishlist);
 // TODO must add middleware for logged in user only
-router.get("/wishlist/:userId", wishlistController.getWishlishByUserId);
-router.post("/wishlist", wishlistController.createWishlish);
-router.delete("/wishlist/:id", wishlistController.deleteWishlish);
+router.get("/wishlists/:userId", wishlistController.getWishlishByUserId);
+router.post("/wishlists", wishlistController.createWishlish);
+router.delete("/wishlists/:id", wishlistController.deleteWishlish);
 
+// TODO must add middleware for logged in user only
+router.get("/carts/:userId", cartController.cartsByUserId);
+router.post("/carts", cartController.addCart);
+router.patch("/carts/:id", cartController.updateQuantity);
+router.delete("/carts/:id", cartController.deleteCart);
 
 
 module.exports = router;
