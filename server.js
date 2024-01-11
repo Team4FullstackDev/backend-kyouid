@@ -1,29 +1,34 @@
-const express = require("express");
-require("dotenv").config();
+const express = require('express');
+require('dotenv').config();
+const path = require('path');
+const morgan = require('morgan');
 
-const routers = require("./routers/index");
-const testConnectionDb = require("./authentication/testConnectionDb");
-const morgan = require("morgan");
-const database = require("./config/database");
+const routers = require('./routers');
+const testConnectionDb = require('./authentication/testConnectionDb');
+const notFound = require('./middleware/notFound');
+const errorHandler = require('./middleware/handleError');
 
 const app = express();
 const PORT = process.env.PORT || 9001;
 
-console.log(process.env.NODE_ENV)
-
-if (process.env.NODE_ENV === "development") {
-  app.use(morgan("dev"));
+if (process.env.NODE_ENV === 'development') {
+	app.use(morgan('dev'));
 }
-
-console.log(database);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'upload/public/products')));
 
 // * routers
 app.use(routers);
 
+// * Error Routing Not Found
+app.use(notFound);
+
+// * Error Handling
+app.use(errorHandler);
+
 app.listen(PORT, () => {
-  console.log(`server runnnig http://localhost:${PORT}`);
-  testConnectionDb();
+	console.log(`server runnnig http://localhost:${PORT}`);
+	testConnectionDb();
 });
