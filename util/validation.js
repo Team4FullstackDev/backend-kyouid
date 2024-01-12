@@ -5,6 +5,14 @@ const isEmpty = (value) => {
 const isString = (value) => {
 	return typeof value === 'string' || value instanceof String;
 };
+const isEmailValid = (email) => {
+	return (
+		typeof email === 'string' &&
+		email.includes('@') &&
+		email.toLowerCase() === email &&
+		!/\s/.test(email)
+	);
+};
 
 const userDetailAreValid = (
 	fullName,
@@ -12,23 +20,16 @@ const userDetailAreValid = (
 	email,
 	password,
 	phoneNumber,
-	birthDate,
-	isAdmin
+	birthDate
 ) => {
+	console.log(!isEmailValid(email));
 	return (
-		isEmpty(fullName) &&
-		isEmpty(username) &&
-		isEmpty(email) &&
-		isEmpty(password) &&
-		isEmpty(phoneNumber) &&
-		isEmpty(birthDate) &&
-		isEmpty(isAdmin) &&
-		String(phoneNumber) &&
-		username !== username.trim() &&
-		email !== email.trim() &&
-		email !== email.toLowerCase() &&
-		email !== email.includes('@') &&
-		password.length <= 6
+		!isEmpty(fullName) &&
+		!isEmpty(username) &&
+		!isEmpty(email) &&
+		!isEmpty(password) &&
+		!isEmpty(phoneNumber) &&
+		!isEmpty(birthDate)
 	);
 };
 

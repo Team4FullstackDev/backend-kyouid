@@ -1,4 +1,4 @@
-const { Image_Products } = require('../db/models');
+const { Image_Products, Products } = require('../db/models');
 
 module.exports.saveImagesToDatabase = async (req, res, next) => {
 	try {
@@ -16,6 +16,12 @@ module.exports.saveImagesToDatabase = async (req, res, next) => {
 			return res.status(400).send('Please upload an image');
 		}
 
+		const productId = await Products.findByPk(body.productsId);
+
+		if (!productId) {
+			return res.status(404).send('Product not found');
+		}
+		console.log(productId);
 		const thumbnail = thumbnailFiles[0];
 		const image = imageFiles.map((file) => file.filename);
 
@@ -43,16 +49,16 @@ module.exports.getAllImages = async (req, res) => {
 	}
 };
 
-module.exports.deleteImage = async (req, res) => {
-	try {
-		const { id } = req.params;
-		const image = await Image_Products.findOne({ where: { id } });
-		if (!image) return res.status(404).send('Image not found');
+// module.exports.deleteImage = async (req, res) => {
+// 	try {
+// 		const { id } = req.params;
+// 		const image = await Image_Products.findOne({ where: { id } });
+// 		if (!image) return res.status(404).send('Image not found');
 
-		await Image_Products.destroy({ where: { id } });
-		res.send('Image deleted successfully!');
-	} catch (error) {
-		console.error(error);
-		res.status(500).send('Internal Server Error');
-	}
-};
+// 		await Image_Products.destroy({ where: { id } });
+// 		res.send('Image deleted successfully!');
+// 	} catch (error) {
+// 		console.error(error);
+// 		res.status(500).send('Internal Server Error');
+// 	}
+// };
