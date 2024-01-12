@@ -2,9 +2,10 @@ const express = require('express');
 const router = express.Router();
 
 const { uploadProducts } = require('../middleware/multer');
-const { saveImagesToDatabase } = require('../controllers/images');
+const { saveImagesToDatabase, getAllImages } = require('../controllers/images');
 
 // image Router
+router.get('/products', getAllImages);
 router.post(
 	'/products',
 	uploadProducts.fields([

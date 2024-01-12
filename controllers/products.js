@@ -136,10 +136,20 @@ module.exports.deleteProduct = async (req, res) => {
 			id: req.params.id,
 		},
 	});
+
+	if (!product) {
+		return res.status(404).json({ message: 'Product not found' });
+	}
+
 	try {
 		await Products.destroy({
 			where: {
 				id: req.params.id,
+			},
+		});
+		await Image_Products.destroy({
+			where: {
+				productsId: req.params.id,
 			},
 		});
 		res
