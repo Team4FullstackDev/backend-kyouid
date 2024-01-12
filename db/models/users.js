@@ -11,10 +11,16 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-       Users.hasMany(models.Shipment, {
-         foreignKey: "usersId",
-         as: "shipments",
-       });
+      Users.hasMany(models.Shipment, {
+        foreignKey: "usersId",
+        as: "shipments",
+      });
+      Users.hasMany(models.Payments, { foreignKey: "usersId" });
+      Users.hasMany(models.Order, { foreignKey: "userId" });
+      Users.hasMany(models.Carts, { foreignKey: "userId" });
+      Users.hasMany(models.Whishlist, { foreignKey: "userId" });
+
+      Users.hasMany(models.Status_Transaction, { foreignKey: "userId" });
     }
   }
   Users.init(
