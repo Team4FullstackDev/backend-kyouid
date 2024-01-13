@@ -17,7 +17,7 @@ const AuthGuard = require('../middleware/auth');
 app.use('/login', login);
 app.use('/images', AuthGuard, imageRouter);
 app.use('/products', AuthGuard, productsRouter);
-app.use('/users', AuthGuard, userRouter);
+app.use('/users', userRouter);
 app.use('/wishlist', AuthGuard, wishlist);
 app.use('/shipments', AuthGuard, shipments);
 app.use('/payments', AuthGuard, payments);
