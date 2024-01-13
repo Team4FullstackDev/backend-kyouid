@@ -25,7 +25,6 @@ const comparePassword = (password, hash) => {
 			if (err) {
 				reject(err);
 			} else {
-				console.log(password, result);
 				resolve(result);
 			}
 		});

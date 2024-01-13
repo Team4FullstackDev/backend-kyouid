@@ -1,9 +1,9 @@
-'use strict';
-const crypto = require('node:crypto');
+"use strict";
+const crypto = require("node:crypto");
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-	async up(queryInterface, Sequelize) {
-		await queryInterface.bulkInsert(
+  async up(queryInterface, Sequelize) {
+    await queryInterface.bulkInsert(
       "Users",
       [
         {
@@ -31,16 +31,16 @@ module.exports = {
           isAdmin: false,
         },
         {
-			id: "7f7cc341-81a2-457a-a9af-dc7d387c3418",
-			fullName: "Jane Doe",
-			username: "jane",
-			email: "jane.doe@example.com",
-			password: "123456",
-			birthDate: new Date("1995-05-15"),
-			phoneNumber: 1234567890,
-			tokenAccess: "access_token_value",
-			tokenRefresh: "refresh_token_value",
-			isAdmin: false,
+          id: "7f7cc341-81a2-457a-a9af-dc7d387c3418",
+          fullName: "Jane Doe",
+          username: "jane",
+          email: "jane.doe@example.com",
+          password: "123456",
+          birthDate: new Date("1995-05-15"),
+          phoneNumber: 1234567890,
+          tokenAccess: "access_token_value",
+          tokenRefresh: "refresh_token_value",
+          isAdmin: false,
         },
         {
           id: crypto.randomUUID(),
@@ -57,14 +57,14 @@ module.exports = {
       ],
       {}
     );
-	},
+  },
 
-	async down(queryInterface, Sequelize) {
-		/**
-		 * Add commands to revert seed here.
-		 *
-		 * Example:
-		 * await queryInterface.bulkDelete('People', null, {});
-		 */
-	},
+  async down(queryInterface, Sequelize) {
+    /**
+     * Add commands to revert seed here.
+     *
+     * Example:
+     * await queryInterface.bulkDelete('People', null, {});
+     */
+  },
 };
