@@ -10,17 +10,16 @@ const cart = require("./cart");
 const discountsRouter = require("./discountsRouter");
 const login = require("./authLogin");
 const orderRouter = require("./orderRouter");
-const { home } = require("../controllers/users");
+const AuthGuard = require('../middleware/auth')
 
-// app.use("/", home);
-app.post("/login", login);
-app.use("/images", imageRouter);
-app.use("/products", productsRouter);
-app.use("/users", userRouter);
-app.use("/wishlist", wishlist);
-app.use("/shipments", shipments);
-app.use("/carts", cart);
-app.use("/discounts", discountsRouter);
-app.use("/order", orderRouter);
+app.use("/login", login);
+app.use("/images", AuthGuard, imageRouter);
+app.use("/products", AuthGuard, productsRouter);
+app.use("/users", AuthGuard, userRouter);
+app.use("/wishlist", AuthGuard, wishlist);
+app.use("/shipments", AuthGuard, shipments);
+app.use("/carts", AuthGuard, cart);
+app.use("/discounts", AuthGuard, discountsRouter);
+app.use("/order", AuthGuard, orderRouter);
 
 module.exports = app;
