@@ -4,19 +4,27 @@ const { comparePassword } = require('../util/passwordHash');
 const { generateToken } = require('../util/jwt.util');
 
 const login = async (req, res, next) => {
-	const { email, username, password } = req.body;
+	const { username, password } = req.body;
 
 	if (!userLoginAreValid(username, password)) {
 		return res.status(400).json({ message: 'All fields are required' });
 	}
 
 	try {
-		const user = await Users.findOne({
-			where: {
-				username: username,
-				email: email,
-			},
-		});
+		let user;
+		if (username.includes('@')) {
+			user = await Users.findOne({
+				where: {
+					email: username,
+				},
+			});
+		} else {
+			user = await Users.findOne({
+				where: {
+					username: username,
+				},
+			});
+		}
 
 		if (!user) {
 			return res.status(404).json({ message: 'User not found' });
@@ -33,7 +41,7 @@ const login = async (req, res, next) => {
 		res.status(201).json({
 			message: 'User login successfully',
 			data: user.email,
-			token
+			token,
 		});
 	} catch (error) {
 		next(error);
