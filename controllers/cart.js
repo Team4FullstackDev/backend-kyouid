@@ -1,11 +1,15 @@
 
-const { Carts } = require('../db/models')
+const { Carts, Products, Users } = require('../db/models')
 
 module.exports.cartsByUserId = async (req, res) => {
     const userId = req.params.userId
+    if (!userId) {
+        return res.status(400).json({ msg: 'User Id is required' })
+    }
     try {
         const response = await Carts.findAll({
-            where: { userId: userId }
+            where: { userId: userId },
+            include: [Products]
         })
         if(!response) {
             return res.status(404).json({ msg: 'User Id not found' })
@@ -22,12 +26,24 @@ module.exports.addCart = async (req, res) => {
         return res.status(400).json({ msg: 'All fields are required' })
     }
     try {
+
+        const product = await Products.findByPk(productId)
+        const user = await Users.findByPk(userId)
+
+        if(!product) {
+            return res.status(404).json({ msg: 'Product Id not found' })
+        }
+
+        if(!user) {
+            return res.status(404).json({ msg: 'User Id not found' })
+        }
+
         const response = await Carts.create({
             quantity: 1,
             userId: userId,
             productId: productId
         })
-        res.status(201).json({ msg: 'Cart was created successfully' })
+        res.status(201).json({ msg: 'Cart was created successfully', response })
     } catch (error) {
         res.status(500).json({ msg: error.message })
     }
