@@ -7,7 +7,7 @@ module.exports = {
       "Shipments",
       [
         {
-          id: crypto.randomUUID(),
+          id: "334d71de-9cc8-4529-a4ce-ea97c9275176",
           shipmentDate: new Date(),
           address: "Jl. Sultan hasanudin No. 11",
           city: "Mataram",
@@ -19,19 +19,19 @@ module.exports = {
           updatedAt: new Date(),
         },
         {
-          id: crypto.randomUUID(),
+          id: "4345ff2c-310e-48a4-9899-fb2ae1a12ab9",
           shipmentDate: new Date(),
           address: "Jl. Banda Neira No. 12",
           city: "Badung",
           province: "Bali",
           regency: "contoh regency 2",
           postalCode: 86729,
-          usersId: "9b88eefc-90f7-4aa7-ace0-4df2881c6b0e",
+          usersId: "7f7cc341-81a2-457a-a9af-dc7d387c3418",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          id: crypto.randomUUID(),
+          id: "8546f999-ade9-4583-8f98-2ef280402f63",
           shipmentDate: new Date(),
           address: "Jl. Cinta Damai No. 21",
           city: "Mataram",
