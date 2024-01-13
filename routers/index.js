@@ -13,6 +13,7 @@ const discountsRouter = require('./discountsRouter');
 const login = require('./authLogin');
 const orderRouter = require('./orderRouter');
 const AuthGuard = require('../middleware/auth');
+const { home } = require('../controllers/home');
 
 app.use('/login', login);
 app.use('/images', AuthGuard, imageRouter);
@@ -25,5 +26,6 @@ app.use('/status-transaction', AuthGuard, statusTransaction);
 app.use('/carts', AuthGuard, cart);
 app.use('/discounts', AuthGuard, discountsRouter);
 app.use('/order', AuthGuard, orderRouter);
+// app.use('/', home);
 
 module.exports = app;
