@@ -1,17 +1,7 @@
 const multer = require('multer');
-
 const storageProducts = multer.diskStorage({
 	destination: (req, file, cb) => {
 		cb(null, 'upload/public/products');
-	},
-	filename: (req, file, cb) => {
-		cb(null, Math.floor(Math.random() * 10000) + file.originalname);
-	},
-});
-
-const storageAvatar = multer.diskStorage({
-	destination: (req, file, cb) => {
-		cb(null, 'upload/private/profiles');
 	},
 	filename: (req, file, cb) => {
 		cb(null, Math.floor(Math.random() * 10000) + file.originalname);
@@ -39,13 +29,4 @@ const uploadProducts = multer({
 	},
 	fileFilter: fileFilter,
 });
-
-const uploadAvatar = multer({
-	storage: storageAvatar,
-	limits: {
-		fileSize: 1024 * 1024 * 5,
-	},
-	fileFilter: fileFilter,
-});
-
-module.exports = { uploadProducts, uploadAvatar };
+module.exports = { uploadProducts };
