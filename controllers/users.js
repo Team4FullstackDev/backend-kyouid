@@ -55,7 +55,7 @@ module.exports.createUser = async (req, res, next) => {
 		isAdmin,
 	} = req.body;
 
-	console.log(isAdmin)
+	console.log(isAdmin);
 
 	if (
 		!userDetailAreValid(
@@ -86,9 +86,9 @@ module.exports.createUser = async (req, res, next) => {
 			username: username,
 			email: email,
 			password: await hashPassword(password),
-			phoneNumber: password,
+			phoneNumber: phoneNumber,
 			birthDate: birthDate,
-			isAdmin: isAdmin === true ? 1:0,
+			isAdmin: isAdmin === true ? 1 : 0,
 		});
 		res
 			.status(201)
