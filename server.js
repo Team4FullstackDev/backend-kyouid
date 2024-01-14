@@ -17,7 +17,8 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'upload/public')));
+app.use(express.static(path.join(__dirname, './upload/public')));
+app.use(express.static(path.join(__dirname, './public/products')));
 
 // * routers
 app.use(routers);
