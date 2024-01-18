@@ -55,7 +55,6 @@ module.exports.createUser = async (req, res, next) => {
 		isAdmin,
 	} = req.body;
 
-	console.log(isAdmin);
 
 	if (
 		!userDetailAreValid(
