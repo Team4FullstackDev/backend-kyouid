@@ -7,10 +7,7 @@ const isString = (value) => {
 };
 const isEmailValid = (email) => {
 	return (
-		typeof email === 'string' &&
-		email.includes('@') &&
-		email.toLowerCase() === email &&
-		!/\s/.test(email)
+		!email.includes('@') && !email.toLowerCase() === email && !/\s/.test(email)
 	);
 };
 
@@ -66,8 +63,18 @@ const productDetailAreValid = (
 	);
 };
 
+const checkwhiteSpace = (value) => {
+	return /\s/.test(value);
+};
+
+const checkUppercase = (value) => {
+	return /[A-Z]/.test(value);
+};
+
 module.exports = {
 	userDetailAreValid,
 	userLoginAreValid,
 	productDetailAreValid,
+	checkwhiteSpace,
+	checkUppercase,
 };

@@ -38,11 +38,11 @@ module.exports = {
 				allowNull: false,
 			},
 			tokenAccess: {
-				type: Sequelize.STRING,
+				type: Sequelize.STRING(5000),
 				allowNull: true,
 			},
 			tokenRefresh: {
-				type: Sequelize.STRING,
+				type: Sequelize.STRING(5000),
 				allowNull: true,
 			},
 			isAdmin: {

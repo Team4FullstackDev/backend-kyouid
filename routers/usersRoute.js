@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const AuthGuard = require('../middleware/auth');
+// const AuthGuard = require('../middleware/auth');
+const { guardUser, guardAdmin } = require('../config/security');
 const {
 	getUsers,
 	getUsersById,
@@ -10,10 +11,10 @@ const {
 } = require('../controllers/users');
 
 // * User Router
-router.get('/', AuthGuard, getUsers);
-router.get('/:id', AuthGuard, getUsersById);
+router.get('/', guardUser, guardAdmin, getUsers);
+router.get('/:id', guardUser, guardAdmin, getUsersById);
 router.post('/', createUser);
-router.patch('/:id', AuthGuard, updateUser);
-router.delete('/:id', AuthGuard, deleteUser);
+router.patch('/:id', guardUser, guardAdmin, updateUser);
+router.delete('/:id', guardUser, guardAdmin, deleteUser);
 
 module.exports = router;

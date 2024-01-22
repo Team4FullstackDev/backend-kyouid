@@ -1,6 +1,12 @@
 const { Users } = require('../db/models');
-const { userDetailAreValid } = require('../util/validation');
+const { Op } = require('sequelize');
+const {
+	userDetailAreValid,
+	checkUppercase,
+	checkwhiteSpace,
+} = require('../util/validation');
 const { hashPassword } = require('../util/passwordHash');
+
 module.exports.home = (req, res, next) => {
 	res.send('<h1>INI API</h1>');
 };
@@ -15,9 +21,15 @@ module.exports.getUsers = async (req, res, next) => {
 				'email',
 				'phoneNumber',
 				'isAdmin',
+				'tokenRefresh',
 			],
 		});
-		res.status(200).json(response);
+		res.status(200).json({
+			message: 'Get All User Success',
+			data: {
+				response,
+			},
+		});
 	} catch (error) {
 		next(error);
 	}
@@ -55,6 +67,17 @@ module.exports.createUser = async (req, res, next) => {
 		isAdmin,
 	} = req.body;
 
+	if (checkUppercase(username)) {
+		return res.status(400).json({ message: 'username must be lowercase' });
+	} else if (checkUppercase(email)) {
+		return res.status(400).json({ message: 'email must be lowercase' });
+	} else if (checkwhiteSpace(username)) {
+		return res
+			.status(400)
+			.json({ message: 'username must not have white space' });
+	} else if (checkwhiteSpace(email)) {
+		return res.status(400).json({ message: 'email must not have white space' });
+	}
 
 	if (
 		!userDetailAreValid(
@@ -69,14 +92,29 @@ module.exports.createUser = async (req, res, next) => {
 		return res.status(400).json({ message: 'Invalid data' });
 	}
 
-	const userId = await Users.findOne({
+	const existingUser = await Users.findOne({
 		where: {
-			email: email,
+			[Op.or]: [
+				{
+					username: username,
+				},
+				{
+					email: email,
+				},
+			],
 		},
 	});
 
-	if (userId) {
-		return res.status(400).json({ message: 'User already exist' });
+	if (existingUser) {
+		if (existingUser.username === username && existingUser.email === email) {
+			return res
+				.status(400)
+				.json({ message: 'username and email already exists' });
+		} else if (existingUser.username === username) {
+			return res.status(400).json({ message: 'username already exists' });
+		} else if (existingUser.email === email) {
+			return res.status(400).json({ message: 'email already exists' });
+		}
 	}
 
 	try {
@@ -87,7 +125,7 @@ module.exports.createUser = async (req, res, next) => {
 			password: await hashPassword(password),
 			phoneNumber: phoneNumber,
 			birthDate: birthDate,
-			isAdmin: isAdmin === true ? 1 : 0,
+			isAdmin: isAdmin,
 		});
 		res
 			.status(201)
@@ -119,6 +157,20 @@ module.exports.updateUser = async (req, res, next) => {
 			isAdmin,
 		} = req.body;
 
+		if (checkUppercase(username)) {
+			return res.status(400).json({ message: 'username must be lowercase' });
+		} else if (checkUppercase(email)) {
+			return res.status(400).json({ message: 'email must be lowercase' });
+		} else if (checkwhiteSpace(username)) {
+			return res
+				.status(400)
+				.json({ message: 'username must not have white space' });
+		} else if (checkwhiteSpace(email)) {
+			return res
+				.status(400)
+				.json({ message: 'email must not have white space' });
+		}
+
 		if (
 			!userDetailAreValid(
 				fullName,
@@ -130,6 +182,31 @@ module.exports.updateUser = async (req, res, next) => {
 			)
 		) {
 			return res.status(400).json({ message: 'Check your user detail' });
+		}
+
+		const existingUser = await Users.findOne({
+			where: {
+				[Op.or]: [
+					{
+						username: username,
+					},
+					{
+						email: email,
+					},
+				],
+			},
+		});
+
+		if (existingUser) {
+			if (existingUser.username === username && existingUser.email === email) {
+				return res
+					.status(400)
+					.json({ message: 'username and email already exists' });
+			} else if (existingUser.username === username) {
+				return res.status(400).json({ message: 'username already exists' });
+			} else if (existingUser.email === email) {
+				return res.status(400).json({ message: 'email already exists' });
+			}
 		}
 
 		const result = await Users.update(

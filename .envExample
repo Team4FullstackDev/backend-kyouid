@@ -1,8 +1,10 @@
-NODE_ENV = 
+NODE_ENV = development
 PORT = 
 DATABASE = 
 USER = 
 PASSWORD = 
 HOST = 
 PORTDB = 
-JWT_SECRET = d28B`$s^;pf?tyN9Wk3#,e"wUr>vq<P=mD(g~cXC!:Q.)j'u/
+SECRET_SESSION =
+REFRESH_TOKEN_SECRET =
+ACCESS_TOKEN_SECRET = 

@@ -9,6 +9,10 @@ Cara Menjalankan backend pada proyek:
 3. pada file .envExample ubah nama file tersebut menjadi .env.
 4. jangan lupa untuk membuat database terlebih dahulu.
 
+# tools
+
+1. nodejs 20.0 lts
+
 | Plugin                                                   |
 | -------------------------------------------------------- |
 | NODE_ENV = development                                   |
@@ -18,6 +22,9 @@ Cara Menjalankan backend pada proyek:
 | USERNAME = Password Bebas dan harus di sesuaikan         |
 | HOST = localhost                                         |
 | PORTDB = 3360                                            |
+| SECRET_SESSION =                                         |
+| REFRESH_TOKEN_SECRET =                                   |
+| ACCESS_TOKEN_SECRET =                                    |
 
 ## Development
 
@@ -29,7 +36,16 @@ Setelah mengisi file .env langkah selanjutnya melakukan perintah berikut
 npm install
 ```
 
-#import Table
+# Menjalankan Project
+
+perintah ini berfungsi menjalankan server backend
+
+```sh
+npm run dev:server
+```
+
+# import Table
+
 perintah ini berfungsi mengimport seluruh file table ke database.
 
 ```sh
