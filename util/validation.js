@@ -19,7 +19,6 @@ const userDetailAreValid = (
 	phoneNumber,
 	birthDate
 ) => {
-	console.log(!isEmailValid(email));
 	return (
 		!isEmpty(fullName) &&
 		!isEmpty(username) &&

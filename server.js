@@ -4,10 +4,10 @@ const path = require('path');
 const cors = require('cors');
 const morgan = require('morgan');
 
-const routers = require('./routers');
+const routers = require('./src/api/routers');
 const testConnectionDb = require('./authentication/testConnectionDb');
-const notFound = require('./middleware/notFound');
-const errorHandler = require('./middleware/handleError');
+const notFound = require('./src/api/middleware/notFound');
+const errorHandler = require('./src/api/middleware/handleError');
 const sessionConfig = require('./util/sessionConfig');
 
 const app = express();
@@ -16,6 +16,8 @@ const PORT = process.env.PORT || 9001;
 if (process.env.NODE_ENV === 'development') {
 	app.use(morgan('dev'));
 }
+
+const API = '/api/v1';
 
 app.use(
 	cors({
@@ -36,7 +38,11 @@ app.use(express.static(path.join(__dirname, './public/products')));
 app.use(sessionConfig());
 
 // * routers
-app.use(routers);
+/*
+  TODO:
+  - API PREFIX CHANGE TO /api/v1
+*/
+app.use(API, routers);
 
 // * Error Routing Not Found
 app.use(notFound);

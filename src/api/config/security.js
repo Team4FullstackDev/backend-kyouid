@@ -1,6 +1,6 @@
 const { Users } = require('../db/models');
 const jwt = require('jsonwebtoken');
-const { generateAccessToken } = require('../util/generateToken');
+const { generateAccessToken } = require('../../../util/generateToken');
 require('dotenv').config();
 
 // * check user is login

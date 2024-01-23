@@ -1,10 +1,13 @@
 const { Users } = require('../db/models');
-const { userLoginAreValid } = require('../util/validation');
-const { comparePassword } = require('../util/passwordHash');
+const {
+	userLoginAreValid,
+	userDetailAreValid,
+} = require('../../../util/validation');
+const { comparePassword } = require('../../../util/passwordHash');
 const {
 	generateAccessToken,
 	generateRefreshToken,
-} = require('../util/generateToken');
+} = require('../../../util/generateToken');
 
 const login = async (req, res, next) => {
 	const { username, password } = req.body;

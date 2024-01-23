@@ -4,8 +4,8 @@ const {
 	userDetailAreValid,
 	checkUppercase,
 	checkwhiteSpace,
-} = require('../util/validation');
-const { hashPassword } = require('../util/passwordHash');
+} = require('../../../util/validation');
+const { hashPassword } = require('../../../util/passwordHash');
 
 module.exports.home = (req, res, next) => {
 	res.send('<h1>INI API</h1>');

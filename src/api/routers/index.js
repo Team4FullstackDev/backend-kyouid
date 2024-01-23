@@ -13,7 +13,7 @@ const discountsRouter = require('./discountsRouter');
 const routerAuth = require('./authLogin');
 const orderRouter = require('./orderRouter');
 const { guardUser, guardAdmin } = require('../config/security');
-const { home } = require('../controllers/home');
+const healthCheck = require('./healthRouter');
 
 app.use('/', routerAuth);
 app.use('/images', guardUser, guardAdmin, imageRouter);
@@ -26,6 +26,6 @@ app.use('/status-transaction', guardUser, statusTransaction);
 app.use('/carts', guardUser, cart);
 app.use('/discounts', guardUser, guardAdmin, discountsRouter);
 app.use('/order', guardUser, guardAdmin, orderRouter);
-// app.use('/', home);
+app.use('/health', healthCheck);
 
 module.exports = app;

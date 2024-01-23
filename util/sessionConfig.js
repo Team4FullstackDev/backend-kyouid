@@ -1,7 +1,7 @@
 const session = require('express-session');
 const SequalizeStore = require('connect-session-sequelize')(session.Store);
 const { Sequelize } = require('sequelize');
-const database = require('../config/database');
+const database = require('../src/api/config/database');
 require('dotenv').config();
 
 const sequalize = new Sequelize(database.development);
