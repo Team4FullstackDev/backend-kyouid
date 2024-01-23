@@ -67,16 +67,20 @@ module.exports.createUser = async (req, res, next) => {
 		isAdmin,
 	} = req.body;
 
-	if (checkUppercase(username)) {
-		return res.status(400).json({ message: 'username must be lowercase' });
-	} else if (checkUppercase(email)) {
-		return res.status(400).json({ message: 'email must be lowercase' });
-	} else if (checkwhiteSpace(username)) {
+	if (checkUppercase(username) || checkwhiteSpace(username)) {
 		return res
 			.status(400)
-			.json({ message: 'username must not have white space' });
-	} else if (checkwhiteSpace(email)) {
-		return res.status(400).json({ message: 'email must not have white space' });
+			.json({
+				message: "Username must be lowercase and not contain white space.",
+			});
+	}
+
+	if (checkUppercase(email) || checkwhiteSpace(email)) {
+		return res
+			.status(400)
+			.json({
+				message: "Email must be lowercase and not contain white space.",
+			});
 	}
 
 	if (

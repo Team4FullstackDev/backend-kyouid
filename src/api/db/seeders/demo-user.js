@@ -1,6 +1,6 @@
 'use strict';
 const crypto = require('node:crypto');
-const { hashPassword } = require('../../util/passwordHash');
+const { hashPassword } = require('../../../../util/passwordHash');
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
 	async up(queryInterface, Sequelize) {

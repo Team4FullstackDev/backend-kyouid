@@ -10,7 +10,8 @@
     "dev:server": "nodemon server.js",
     "dev:model": "npx sequelize-cli db:migrate --debug",
     "dev:seed": "npx sequelize-cli db:seed:all --debug",
-    "dev:drop": "npx sequelize-cli db:migrate:undo:all --debug"
+    "dev:drop": "npx sequelize-cli db:migrate:undo:all --debug",
+    "dev:restart": "npx sequelize-cli db:migrate:undo:all --debug && npx sequelize-cli db:migrate --debug && npx sequelize-cli db:seed:all --debug"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

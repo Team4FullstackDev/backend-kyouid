@@ -86,7 +86,19 @@ const guardAdmin = async (req, res, next) => {
 		return res.status(401).json({ message: 'Your Not Admin' });
 	}
 };
+
+// * Ensuring that the user making the request is indeed the same user it claims to be.
+const authorizeUser = async (req, res, next) => {
+	const requestUserId = req.params.userId || (req.body && req.body.userId);
+
+	if(requestUserId !== req.session.user.id) {
+		return res.status(403).json({ message: 'Forbidden access' });
+	}
+	next();
+};
+
 module.exports = {
 	guardUser,
 	guardAdmin,
+	authorizeUser
 };
