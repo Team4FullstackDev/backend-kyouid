@@ -1,70 +1,323 @@
-'use strict';
+"use strict";
 
-const crypto = require('node:crypto');
+const crypto = require("node:crypto");
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-	async up(queryInterface, Sequelize) {
-		await queryInterface.bulkInsert(
-			'Products',
-			[
-				{
-					id: '97df1c0c-6cb2-499b-98c7-ee2a238fd85f',
-					title:
-						'PVC Figure Kamado Nezuko - Kimetsu no Yaiba Kizuna no Sou Vol.45 (18cm)',
-					price: 300000,
-					description: 'Description for Product 3',
-					minimumCredits: 60,
-					stock: 100,
-					category: 'Prize Figure',
-					series: 'Kimetsu no Yaiba',
-					status: 'Ready-Stock',
-					character: 'Kamado Nezuko',
-					manufacture: 'Bandai Spirits',
-					createdAt: new Date(),
-					updatedAt: new Date(),
-				},
-				{
-					id: 'f1baca44-102b-4157-9439-1a249bc3a9fa',
-					title: 'Product 4',
-					price: 200,
-					description: 'Description for Product 4',
-					minimumCredits: 100,
-					stock: 50,
-					category: 'Category 4',
-					series: 'Series 4',
-					status: 'Ready-Stock',
-					character: 'Character 4',
-					manufacture: 'Manufacture 34',
-					createdAt: new Date(),
-					updatedAt: new Date(),
-				},
-				{
-					id: '95522666-bc5f-4a1b-899e-4c236ed74a59',
-					title: 'Product 5',
-					price: 250,
-					description: 'Description for Product 5',
-					minimumCredits: 200,
-					stock: 55,
-					category: 'Category 5',
-					series: 'Series 5',
-					status: 'Ready-Stock',
-					character: 'Character 5',
-					manufacture: 'Manufacture 5',
-					createdAt: new Date(),
-					updatedAt: new Date(),
-				},
-			],
-			{}
-		);
-	},
+  async up(queryInterface, Sequelize) {
+    await queryInterface.bulkInsert(
+      "Products",
+      [
+        {
+          id: "9a663ca8-2f18-4c39-95a0-e23c0eadca4c",
+          title:
+            "[FLASH PO] Nendoroid Gojo Satoru - High School Ver. Jujutsu Kaisen",
+          status: "Late Pre-Order",
+          manufacture: "Good Smile Company",
+          minimumCredits: 200000,
+          price: 680000,
+          description:
+            'Throughout heaven and earth, I alone am the honored one?."Fromthe anime series "Jujutsu Kaisen Hidden Inventory / Premature Death" comes a Nendoroid of Satoru Gojo from when he attended Tokyo Jujutsu High School!Face plates:  Confident face  Goading face  Aggravated face  Sulking faceOptional parts:  Sunglasses  Koregusu  Cell phone  Other optional parts for different poses.',
+          character: "Gojo Satoru",
+          series: "Jujutsu Kaisen",
+          category: "Nendoroid",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: "512fa0dd-62aa-423d-bcf8-1855a6984cd2",
+          title: "Nendoroid Miyuki Shirogane - Kaguya-sama wa Kokurasetai",
+          status: "Ready Stock",
+          manufacture: "Toytec",
+          minimumCredits: "",
+          price: 1450000,
+          description:
+            'Then, I\'ll show them to you."From the popular anime series "Kaguya-sama: Love is War" comes a Nendoroid of Miyuki Shirogane, student council president of Shuchiin Academy!He comes with three face plates including his serious expression reminiscent of the show\'s key visual, a cuter smiling expression and a "That\'s it!" expression! Optional parts include his smartphone and a pair of the cat ears that looked so good on him they drove Kaguya crazy!The inner cardboard sheet of the packaging functions as a background sheet of the student council room that can be displayed with the background sheet included with Nendoroid Kaguya Shinomiya to create an even larger scene of the student council room!Be sure to add him to your collection along with Nendoroid Kaguya Shinomiya scheduled to release in July and Nendoroid Chika Fujiwara set to go up for preorder at a later date!',
+          character: "Miyuki Shirogane",
+          series: "Kaguya-Sama Wa Kokurasetai",
+          category: "Nendoroid",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: "319203aa-06f3-4804-9583-cef1d560f2ed",
+          title:
+            "[REVIVE] PVC Figure 1/7 Hatsune Miku - Cheongsam / Chinese / China Dress Ver.",
+          status: "Late Pre-Order",
+          manufacture: "Myethos",
+          minimumCredits: 900000,
+          price: 2950000,
+          description:
+            "MaterialsABS, PVCScale & Dimensions1/7 H=250mm (9.75in, 1:1=1.75m)",
+          character: "Hatsune Miku",
+          series: "Vocaloid",
+          category: "Scaled Figure",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: "55f3132e-fbed-4edc-8852-d317787aff0e",
+          title:
+            "Precious G.E.M. GEM Figure Wargreymon & Yagami Taichi (25cm) (Re-Release)",
+          status: "Ready Stock",
+          manufacture: "Megahouse",
+          minimumCredits: "",
+          price: 3000000,
+          description:
+            "2 pre-painted finished figures[Size] Height: Approximately 250mm (non-scale)[Material] PVC, ABS[Set contents list]Figure body WarGreymonFigure body Taichi Yagami",
+          character: "Wargreymon",
+          series: "Digimon",
+          category: "Scaled Figure",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: "991b6d48-ed32-4ded-bb41-49bf24e4c9c5",
+          title: "[REVIVE] Noodle Stopper Figure Hatsune Miku (14cm)",
+          status: "Late Pre-Order",
+          manufacture: "Furyu",
+          minimumCredits: 100000,
+          price: 400000,
+          description: "MaterialPVCScale & DimensionsH=140mm (5.46in)",
+          character: "Hatsune Miku",
+          series: "Vocaloid",
+          category: "Prize Figure",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: "10a86b5d-c87b-4f32-8dc1-33094a88844e",
+          title:
+            "PVC Figure Muichiro Tokito - Kimetsu no Yaiba Kizuna no Sou Vol.44 (18cm)",
+          status: "Ready Stock",
+          manufacture: "Bandai Spirits",
+          minimumCredits: "",
+          price: 290000,
+          description: "MaterialsABS, PVCDimensionsH=130mm (5.07in)",
+          character: "Muichiro Tokito",
+          series: "Kimetsu No Yaiba",
+          category: "Prize Figure",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: "649ef2b3-4206-4dee-984e-ac3ab3b3ac9b",
+          title: "Pop Up Parade Maomao - Kusuriya no Hitorigoto",
+          status: "Pre-Order",
+          manufacture: "Good Smile Company",
+          minimumCredits: 100000,
+          price: 510000,
+          description:
+            "A New Addition to the POP UP PARADE!POP UP PARADE is a series of figures that are easy to collect with affordable prices and speedy releases! Each figure typically stands around 17-18cm in height and the series features a vast selection of characters from popular anime and game series, with many more to be added soon!Painted plastic non-scale complete product with stand included. Approximately 170mm in height.",
+          character: "Maomao",
+          series: "Kusuriya No Hitorigoto",
+          category: "Pop Up Parade",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: "a61dabdf-c840-4abd-803d-42c5ce599795",
+          title: "Pop Up Parade Figure Kurisu Makise - Steins;Gate",
+          status: "Ready Stock",
+          manufacture: "Good Smile Arts Shanghai",
+          minimumCredits: "",
+          price: 540000,
+          description:
+            'The genius Lab Member 004 joins the POP UP PARADE series.POP UP PARADE is a series of figures that are easy to collect with affordable prices and speedy releases! Each figure typically stands around 17-18cm in height and the series features a vast selection of characters from popular anime and game series, with many more to be added soon! From the science adventure series "STEINS;GATE" comes a POP UP PARADE figure of "Christina", also known as Kurisu Makise! "There is no -tina!',
+          character: "Kurisu Makise",
+          series: "Steins;Gate",
+          category: "Pop Up Parade",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: "fda60fdb-2a4e-4827-8b0c-936f8182b8a4",
+          title: "Model Kit Motor Nuclear MNP-XH01 Bai Qi",
+          status: "Ready Stock",
+          manufacture: "Motor Nuclear",
+          minimumCredits: "",
+          price: 840000,
+          description: "MaterialsABS, PE, PET, Polyurethane, PS",
+          character: "Bai Qi",
+          series: "Original Character",
+          category: "Model Kit",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: "33185aad-f448-4f2c-afef-6dc78d80ebb2",
+          title: "[REVIVE] Figure-rise Standard Kamen Rider Blade",
+          status: "Late Pre-Order",
+          manufacture: "Bandai Spirits",
+          minimumCredits: 100000,
+          price: 570000,
+          description: "MaterialsABS, PE, PET, Polyurethane, PS",
+          character: "Kamen Rider Blade",
+          series: "Kamen Rider",
+          category: "Model Kit",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: "1c60f2cd-5157-4ef3-b994-ec13324a1fb6",
+          title:
+            "[REVIVE] [Limited Production] figma Gojo Satoru - Jujutsu Kaisen",
+          status: "Late Pre-Order",
+          manufacture: "Good Smile Company",
+          minimumCredits: 300000,
+          price: 1000000,
+          description:
+            'Don\'t worry, I\'m the strongest."From the anime series "Jujutsu Kaisen" comes a figma of Satoru Gojo!  Using the smooth yet posable joints of figma, you can create a variety of poses from the series.  A flexible plastic is used for important areas, allowing proportions to be kept without compromising posability.  He comes with three face plates including a smiling face, a face for when he pulls up his mask and a serious face.  He comes with hand parts to pose him using Domain Expansion: Infinite Void, hand parts to pose him using Hollow Technique: Purple and interchangeable arm parts to display him with his hands in his pockets.  An interchangeable hair part with his hair down and a hair part with sunglasses attached are included for displaying him with his mask off.  An articulated figma stand is included to display the figma in a variety of poses.',
+          character: "Gojo Satoru",
+          series: "Jujutsu Kaisen",
+          category: "Figma",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: "40534e8b-7876-4063-8c3c-cf67effcaf89",
+          title:
+            "[GSC Limited Bonus] figma La+ / Laplus Darknesss - hololive production",
+          status: "Pre-Order",
+          manufacture: "Max Factory Limited",
+          minimumCredits: 700000,
+          price: 2000000,
+          description:
+            "Face plates:  Straight face  Smiling face  Frustrated faceOptional parts:  Crow  Cola  Visible hand sleeve parts  Other optional parts for different poses.",
+          character: "Laplus Darknesss",
+          series: "Hololive Production",
+          category: "Figma",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: "0a8f672d-99b8-4240-af77-29ea62a3a40a",
+          title: "Blue Archive Official Artbook / Artworks Vol. 1",
+          status: "Ready Stock",
+          manufacture: "Nexon",
+          minimumCredits: "",
+          price: 720000,
+          description:
+            'The official artwork of "Blue Archive" is finally here!Released during the 1st anniversary of the release (2021.02.04-2022.02.03)The beautiful artwork of "Blue Archive" is thoroughly recorded.In addition to visual materials such as character profiles, memorial lobbies, and key visuals,Character initial settings, rough illustrations, special interviews with the production team (art director x scenario director), etc.A lot of making materials approaching the back side of "Bruaka" are also posted!It\'s a fulfilling book that is both impressive and readable!',
+          character: "Sunaookami Shiroko",
+          series: "Blue Archive",
+          category: "Merchandise",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: "32071aec-afeb-4cb0-8b1a-4a93f3267e67",
+          title: "[REVIVE] Diluc Ragnvindr Theme Knitwear (M) - Genshin Impact",
+          status: "Late Pre-Order",
+          manufacture: "Mihoyo",
+          minimumCredits: 200000,
+          price: 840000,
+          description: "Original from miHoYo China",
+          character: "Diluc",
+          series: "Genshin Impact",
+          category: "Merchandise",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: "21958fef-0326-4e6c-b968-da814954edcb",
+          title:
+            "[REVIVE] Hololive JP Minato Aqua Plush hololive friends with u Vol. 5",
+          status: "Pre-Order",
+          manufacture: "Cover",
+          minimumCredits: 200000,
+          price: 750000,
+          description:
+            "The sales will end if the product is out of stock.?Size: Approx. H205 W150 D120mm?Material: Polyester",
+          character: "Minato Aqua",
+          series: "Hololive",
+          category: "Plush",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: "67bf71b5-0f93-4ca8-ac49-a3502f3d4115",
+          title: "Pochita Koropofu Nuigurumi (12cm) - Chainsaw Man",
+          status: "Ready Stock",
+          manufacture: "Sk Japan",
+          minimumCredits: "",
+          price: 370000,
+          description: "Original from japan",
+          character: "Pochita",
+          series: "Chainsaw Man",
+          category: "Plush",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: "a916b95d-189c-4f55-a4e1-eab18c7d84d7",
+          title:
+            "SoftBank Creative GA Bunko Light Novel Hikikomari Kyuuketsuki no Monmon 6 - Kobayashi Kotei",
+          status: "Ready Stock",
+          manufacture: "Softbank",
+          minimumCredits: "",
+          price: 170000,
+          description: "Original from Japan, Japanese Language",
+          character: "Terakomari Gandesblood",
+          series: "Hikikomari Kyuuketsuki No Monmon",
+          category: "Light Novel",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: "d5b1a88a-ecf3-4bb8-9ef1-f8c71749eae9",
+          title:
+            "Kadokawa Dengeki Bunko Light Novel Butareba Buta no Liver wa Kanetsu Shiro 6 - Sakai Takuma",
+          status: "Ready Stock",
+          manufacture: "Kadokawa",
+          minimumCredits: "",
+          price: 150000,
+          description: "Original from Japan, Japanese Language",
+          character: "Jess Yesma",
+          series: "Buta No Liver Wa Kanetsu Shiro",
+          category: "Light Novel",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: "9f077665-2e11-4651-8cb1-dca8910c65b4",
+          title: "Shueisha Jump Manga Jujutsu Kaisen Vol. 0 - Gege Akutami",
+          status: "Ready Stock",
+          manufacture: "Shueisha",
+          minimumCredits: "",
+          price: 180000,
+          description: "Original from Japan, Japanese Language",
+          character: "Itadori Yuji",
+          series: "Jujutsu Kaisen",
+          category: "Manga",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+        {
+          id: "01088898-d498-4f10-9132-01463e63da3e",
+          title: "Manga Kuroko no Basket MVP Bangai Hen Aomine Plus Kareshi",
+          status: "Ready Stock",
+          manufacture: "Fusion Product",
+          minimumCredits: "",
+          price: 160000,
+          description: "Original from Japan, Japanese Language",
+          character: "Aomine Daiki",
+          series: "Kuroko No Basket",
+          category: "Manga",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
+      ],
+      {}
+    );
+  },
 
-	async down(queryInterface, Sequelize) {
-		/**
-		 * Add commands to revert seed here.
-		 *
-		 * Example:
-		 * await queryInterface.bulkDelete('People', null, {});
-		 */
-	},
+  async down(queryInterface, Sequelize) {
+    /**
+     * Add commands to revert seed here.
+     *
+     * Example:
+     * await queryInterface.bulkDelete('People', null, {});
+     */
+  },
 };
