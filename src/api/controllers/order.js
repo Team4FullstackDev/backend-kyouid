@@ -26,23 +26,14 @@ const getOrderById = async (req, res) => {
 };
 
 const createOrder = async (req, res) => {
-  const {
-    userId,
-    shipmentId,
-    shipmentUsersId,
-    paymentId,
-    paymentUsersId,
-    totalPrice,
-  } = req.body;
+  const { userId, shipmentId, paymentId, totalPrice } = req.body;
 
   try {
     const order = await Order.create({
       orderDate: new Date(),
       userId,
       shipmentId,
-      shipmentUsersId,
       paymentId,
-      paymentUsersId,
       totalPrice,
       createdAt: new Date(),
       updatedAt: new Date(),
