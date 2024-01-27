@@ -1,6 +1,8 @@
 const { Products, Image_Products } = require('../db/models');
+const fs = require('fs');
+const convert = require('../../../util/convertBase64');
 
-module.exports.getProducts = async (req, res) => {
+module.exports.getProducts = async (req, res, next) => {
 	try {
 		const { status, category, character, series } = req.query;
 		const whereClause = {};
@@ -17,9 +19,12 @@ module.exports.getProducts = async (req, res) => {
 			],
 			where: whereClause,
 		});
+
 		res.status(200).json({
 			message: 'Get products successfully',
-			data: products,
+			data: {
+				products: products,
+			},
 		});
 	} catch (error) {
 		next(error);
@@ -47,7 +52,7 @@ module.exports.getProductsById = async (req, res) => {
 	}
 };
 
-module.exports.createProduct = async (req, res) => {
+module.exports.createProduct = async (req, res, next) => {
 	try {
 		const {
 			status,
@@ -73,9 +78,36 @@ module.exports.createProduct = async (req, res) => {
 			character,
 			manufacture,
 		});
-		res
-			.status(200)
-			.json({ message: 'Product was created successfully', data: product });
+
+		const thumbnailFiles = req.files['thumbnail'];
+		const imageFiles = req.files['image'];
+
+		if (!product.id) {
+			return res.status(404).send('Product not found');
+		}
+
+		if (
+			!thumbnailFiles ||
+			!imageFiles ||
+			thumbnailFiles.length === 0 ||
+			imageFiles.length === 0
+		) {
+			console.log('upload image');
+			return res.status(400).send('Please upload an image');
+		}
+
+		const thumbnail = thumbnailFiles[0];
+		const image = imageFiles.map((file) => file.path);
+
+		const imageProduct = await Image_Products.create({
+			image: image,
+			thumbnail: thumbnail.path,
+			productsId: product.id,
+		});
+		res.status(200).json({
+			message: 'Product was created successfully',
+			data: [{ product, image: imageProduct }],
+		});
 	} catch (error) {
 		next(error);
 	}
@@ -130,10 +162,16 @@ module.exports.updateProduct = async (req, res) => {
 	}
 };
 
-module.exports.deleteProduct = async (req, res) => {
+module.exports.deleteProduct = async (req, res, next) => {
 	const product = await Products.findOne({
 		where: {
 			id: req.params.id,
+		},
+	});
+
+	const findImage = await Image_Products.findAll({
+		where: {
+			productsId: req.params.id,
 		},
 	});
 
@@ -147,14 +185,29 @@ module.exports.deleteProduct = async (req, res) => {
 				id: req.params.id,
 			},
 		});
+
+		findImage.map((image) => {
+			const listImage = convert(image.image).map((item) => item);
+			for (let i = 0; i < listImage.length; i++) {
+				fs.unlink(listImage[i], (err) => {
+					if (err) {
+						console.error(err);
+						return;
+					}
+				});
+				console.log('File berhasil di hapus');
+			}
+		});
+
 		await Image_Products.destroy({
 			where: {
 				productsId: req.params.id,
 			},
 		});
-		res
+
+		return res
 			.status(200)
-			.json({ message: 'Get products successfully', data: product });
+			.json({ message: 'Product Success deleted', data: product.title });
 	} catch (error) {
 		next(error);
 	}
