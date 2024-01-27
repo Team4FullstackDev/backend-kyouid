@@ -93,7 +93,7 @@ module.exports.createUser = async (req, res, next) => {
 			birthDate
 		)
 	) {
-		return res.status(400).json({ message: 'Invalid data' });
+		return res.status(400).json({ message: 'Invalid data check' });
 	}
 
 	const existingUser = await Users.findOne({
