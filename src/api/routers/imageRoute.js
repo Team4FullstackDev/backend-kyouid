@@ -6,13 +6,13 @@ const { saveImagesToDatabase, getAllImages } = require('../controllers/images');
 
 // image Router
 router.get('/products', getAllImages);
-router.post(
-	'/products',
-	uploadProducts.fields([
-		{ name: 'thumbnail', maxCount: 1 },
-		{ name: 'image', maxCount: 10 },
-	]),
-	saveImagesToDatabase
-);
+// router.post(
+// 	'/products',
+// 	uploadProducts.fields([
+// 		{ name: 'thumbnail', maxCount: 1 },
+// 		{ name: 'image', maxCount: 10 },
+// 	]),
+// 	saveImagesToDatabase
+// );
 
 module.exports = router;

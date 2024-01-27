@@ -68,19 +68,15 @@ module.exports.createUser = async (req, res, next) => {
 	} = req.body;
 
 	if (checkUppercase(username) || checkwhiteSpace(username)) {
-		return res
-			.status(400)
-			.json({
-				message: "Username must be lowercase and not contain white space.",
-			});
+		return res.status(400).json({
+			message: 'Username must be lowercase and not contain white space.',
+		});
 	}
 
 	if (checkUppercase(email) || checkwhiteSpace(email)) {
-		return res
-			.status(400)
-			.json({
-				message: "Email must be lowercase and not contain white space.",
-			});
+		return res.status(400).json({
+			message: 'Email must be lowercase and not contain white space.',
+		});
 	}
 
 	if (
@@ -93,7 +89,7 @@ module.exports.createUser = async (req, res, next) => {
 			birthDate
 		)
 	) {
-		return res.status(400).json({ message: 'Invalid data' });
+		return res.status(400).json({ message: 'Invalid data check' });
 	}
 
 	const existingUser = await Users.findOne({
