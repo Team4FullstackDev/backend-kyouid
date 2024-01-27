@@ -1,3 +1,4 @@
+const lodash = require('lodash')
 const { Users } = require('../db/models');
 const {
 	userLoginAreValid,
@@ -78,6 +79,7 @@ const login = async (req, res, next) => {
 			message: 'User login successfully',
 			accessToken: accessToken,
 			refreshToken: refreshToken,
+			user: lodash.pick(user, ['id', 'username']) 
 		});
 	} catch (error) {
 		next(error);
