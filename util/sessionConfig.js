@@ -20,10 +20,6 @@ const configSession = () => {
 		store: store,
 		cookie: {
 			maxAge: 1000 * 60 * 60 * 24,
-			secure: false,
-			httpOnly: true,
-			sameSite: 'strict',
-			// domain: 'localhost',
 		},
 	});
 };

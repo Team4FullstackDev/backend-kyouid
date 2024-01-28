@@ -21,7 +21,7 @@ module.exports.cartsByUserId = async (req, res) => {
 }
 
 module.exports.addCart = async (req, res) => {
-    const { userId, productId } = req.body
+    const { userId, productId, quantity } = req.body
     if(!userId || !productId) {
         return res.status(400).json({ msg: 'All fields are required' })
     }
@@ -39,7 +39,7 @@ module.exports.addCart = async (req, res) => {
         }
 
         const response = await Carts.create({
-            quantity: 1,
+            quantity: quantity || 1,
             userId: userId,
             productId: productId
         })

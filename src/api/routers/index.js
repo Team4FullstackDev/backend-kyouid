@@ -23,7 +23,7 @@ app.use('/wishlist', guardUser, wishlist);
 app.use('/shipments', guardUser, shipments);
 app.use('/payments', guardUser, payments);
 app.use('/status-transaction', guardUser, statusTransaction);
-app.use('/carts', guardUser, cart);
+app.use('/carts', cart);
 app.use('/discounts', guardUser, guardAdmin, discountsRouter);
 app.use('/order', guardUser, guardAdmin, orderRouter);
 app.use('/health', healthCheck);
