@@ -3,11 +3,13 @@ const { Carts, Products, Users } = require('../db/models')
 
 module.exports.cartsByUserId = async (req, res) => {
     const userId = req.params.userId
+    console.log('userId', userId)
     if (!userId) {
         return res.status(400).json({ msg: 'User Id is required' })
     }
     try {
         const response = await Carts.findAll({
+            attributes: ['id', 'quantity'],
             where: { userId: userId },
             include: [Products]
         })
