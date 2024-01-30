@@ -13,6 +13,8 @@ const guardUser = async (req, res, next) => {
 		});
 	}
 
+	console.log(req.session, "dari guardUser");
+
 	if (!req.session.user) {
 		return res.status(401).json({
 			message: 'User not found or null please login again.',
